@@ -1,0 +1,20 @@
+{
+	"BUILD_DIR" : "/home/jankatgen/qprojects/QD/build/Desktop-Debug/QD_autogen",
+	"CMAKE_BINARY_DIR" : "/home/jankatgen/qprojects/QD/build/Desktop-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/jankatgen/qprojects/QD/build/Desktop-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/jankatgen/qprojects/QD",
+	"CMAKE_SOURCE_DIR" : "/home/jankatgen/qprojects/QD",
+	"GENERATOR" : "Ninja",
+	"INCLUDE_DIR" : "/home/jankatgen/qprojects/QD/build/Desktop-Debug/QD_autogen/include",
+	"INPUTS" : [],
+	"LOCK_FILE" : "/home/jankatgen/qprojects/QD/build/Desktop-Debug/CMakeFiles/QD_autogen.dir/AutoRcc_resources_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "resources" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_resources.cpp",
+	"RCC_EXECUTABLE" : "/usr/lib64/qt5/bin/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/home/jankatgen/qprojects/QD/build/Desktop-Debug/CMakeFiles/QD_autogen.dir/AutoRcc_resources_EWIEGA46WW_Used.txt",
+	"SOURCE" : "/home/jankatgen/qprojects/QD/resources.qrc",
+	"VERBOSITY" : 0
+}

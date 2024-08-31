@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/data">
+        <file>src.cpp</file>
+        <file>src.out</file>
+        <file>src.obj</file>
+    </qresource>
+</RCC>

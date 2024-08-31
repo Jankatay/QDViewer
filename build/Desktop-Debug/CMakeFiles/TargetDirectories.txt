@@ -1,0 +1,9 @@
+/home/jankatgen/qprojects/QD/build/Desktop-Debug/CMakeFiles/QD.dir
+/home/jankatgen/qprojects/QD/build/Desktop-Debug/CMakeFiles/edit_cache.dir
+/home/jankatgen/qprojects/QD/build/Desktop-Debug/CMakeFiles/rebuild_cache.dir
+/home/jankatgen/qprojects/QD/build/Desktop-Debug/CMakeFiles/list_install_components.dir
+/home/jankatgen/qprojects/QD/build/Desktop-Debug/CMakeFiles/install.dir
+/home/jankatgen/qprojects/QD/build/Desktop-Debug/CMakeFiles/install/local.dir
+/home/jankatgen/qprojects/QD/build/Desktop-Debug/CMakeFiles/install/strip.dir
+/home/jankatgen/qprojects/QD/build/Desktop-Debug/CMakeFiles/QD_autogen_timestamp_deps.dir
+/home/jankatgen/qprojects/QD/build/Desktop-Debug/CMakeFiles/QD_autogen.dir
