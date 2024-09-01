@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_HCompiler_t {
-    QByteArrayData data[9];
-    char stringdata0[75];
+    QByteArrayData data[7];
+    char stringdata0[57];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,13 +38,11 @@ QT_MOC_LITERAL(2, 19, 0), // ""
 QT_MOC_LITERAL(3, 20, 8), // "assembly"
 QT_MOC_LITERAL(4, 29, 6), // "linked"
 QT_MOC_LITERAL(5, 36, 8), // "filePath"
-QT_MOC_LITERAL(6, 45, 11), // "cmdFinished"
-QT_MOC_LITERAL(7, 57, 9), // "QProcess*"
-QT_MOC_LITERAL(8, 67, 7) // "process"
+QT_MOC_LITERAL(6, 45, 11) // "cmdFinished"
 
     },
     "HCompiler\0compiled\0\0assembly\0linked\0"
-    "filePath\0cmdFinished\0QProcess*\0process"
+    "filePath\0cmdFinished"
 };
 #undef QT_MOC_LITERAL
 
@@ -66,14 +64,14 @@ static const uint qt_meta_data_HCompiler[] = {
        4,    1,   32,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    1,   35,    2, 0x08 /* Private */,
+       6,    0,   35,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void, QMetaType::QString,    5,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 7,    8,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -86,19 +84,8 @@ void HCompiler::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         switch (_id) {
         case 0: _t->compiled((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 1: _t->linked((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 2: _t->cmdFinished((*reinterpret_cast< QProcess*(*)>(_a[1]))); break;
+        case 2: _t->cmdFinished(); break;
         default: ;
-        }
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        switch (_id) {
-        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 2:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QProcess* >(); break;
-            }
-            break;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
@@ -153,7 +140,7 @@ int HCompiler::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 3)
-            qt_static_metacall(this, _c, _id, _a);
+            *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 3;
     }
     return _id;

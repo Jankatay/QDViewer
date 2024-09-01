@@ -11,10 +11,20 @@ MainWindow (QWidget *parent)
     , stdTerm{ new UTerm(this) }
 {
   ui->setupUi (this);
+
   connect(compiler
     , qOverload<QString>
     (&HCompiler::compiled)
     , this, &MainWindow::srcCompiled);
+
+  connect(stdTerm
+    , &UTerm::sigFinishedExec
+    , this, &MainWindow::stdTermFinished);
+
+  connect(compiler
+    , qOverload<QString>
+    (&HCompiler::linked)
+    , this, &MainWindow::finishedLinking);
 
 }
 
@@ -45,14 +55,50 @@ srcCompiled(QString assembly)
   ui->asmBrowser->setText(assembly);
 }
 
-void MainWindow::on_pushButton_pressed()
+void MainWindow::
+on_pushButton_pressed()
 {
   compiler->writeSrc( ui->srcEdit->toPlainText() );
 }
+
 void MainWindow::on_runButton_pressed()
 {
+  compiler->link();
   //QString execPath{  };
   //stdTerm->exec("", QStringList());
-  compiler->link();
+  //QString execPath{ compiler->getExecPath() };
+  //QStringList ARGS{ ui->stdIn->text().split(' ') };
+  //ui->stdIn->clear();
+  //qDebug() << execPath << ARGS;
+  //stdTerm->exec(execPath, ARGS);
+  //qDebug() << execPath << ARGS << "called";
 }
 
+void MainWindow::
+fillStdOutBrowser()
+{
+  //ui->stdOut->setText(out);
+}
+
+void MainWindow::
+finishedLinking(QString execPath)
+{
+  currentTask = fillStdOut;
+  stdTerm->exec(execPath, QStringList());
+  qDebug() << "finished linking";
+}
+
+void MainWindow::
+stdTermFinished()
+{
+
+  switch(currentTask)
+  {
+    case(fillStdOut):
+    {
+      QString out{ stdTerm->getStdOut() };
+      ui->stdOut->setText( out );
+    }
+  }
+
+}

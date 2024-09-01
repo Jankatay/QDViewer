@@ -6,21 +6,21 @@
 CFiles::
 CFiles()
 {
+  OUT = QDir::temp()
+  .absoluteFilePath("CPROJECT_XXXXXX.out");
+
   SRC.setFileTemplate(QDir::temp()
   .absoluteFilePath("CPROJECT_XXXXXX.cpp"));
-
-  OUT.setFileTemplate(QDir::temp()
-  .absoluteFilePath("CPROJECT_XXXXXX.out"));
 
   OBJ.setFileTemplate(QDir::temp()
   .absoluteFilePath("CPROJECT_XXXXXX.obj"));
 
-  if(!SRC.open() || !OUT.open() || !OBJ.open())
+  if(!SRC.open() || !OBJ.open())
   {
     qDebug() << "Couldn't make an SRC file";
   }
+  qDebug() << OUT;
   SRC.close();
-  OUT.close();
   OBJ.close();
 }
 
@@ -54,7 +54,6 @@ readSrc()
 void CFiles::
 writeSrc(QString text)
 {
-  qDebug() << "written";
   QFile SRCTRUNCATE{SRC.fileName()};
 
   if (! SRCTRUNCATE.open(QIODevice::WriteOnly

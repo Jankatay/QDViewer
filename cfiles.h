@@ -15,7 +15,7 @@ public:
   void writeSrc(QString text);
 
   QTemporaryFile SRC; //source file
-  QTemporaryFile OUT; //output file
+  QString OUT; //output file
   QTemporaryFile OBJ; //object file
 };
 

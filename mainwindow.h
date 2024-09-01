@@ -24,14 +24,22 @@ private slots:
   void on_openButton_pressed();
   void on_cButton_pressed();
   void srcCompiled(QString assembly);
-
   void on_pushButton_pressed();
   void on_runButton_pressed();
+  void fillStdOutBrowser();
+  void finishedLinking(QString execPath);
+  void stdTermFinished();
 
 private:
   Ui::MainWindow *ui;
   HCompiler *compiler;
   UTerm *stdTerm;
+
+  enum Tasks
+  {
+    fillStdOut
+  }
+  currentTask;
 };
 
 #endif // MAINWINDOW_H

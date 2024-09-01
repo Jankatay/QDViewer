@@ -1,2 +1,0 @@
-# QDViewer
-QT Disassembly Viewer

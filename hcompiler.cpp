@@ -52,12 +52,11 @@ compile()
   QString srcPath{ FILES.SRC.fileName() };
   QString objPath{ FILES.OBJ.fileName() };
 
+  lastCmd = compileCmd;
   QStringList ARGS{CFLAGS};
   ARGS << "-c" << srcPath
        << "-o" << objPath;
-
   term->exec(CC, ARGS);
-  qDebug() << CC << ARGS;
 }
 
 void HCompiler::
@@ -70,10 +69,10 @@ dump()
     return;
   }
 
+  lastCmd = dumpCmd;
   QString objPath{ FILES.OBJ.fileName() };
   QStringList ARGS{"-d", objPath};
   term->exec(DUMP, ARGS);
-  qDebug() << DUMP << ARGS;
 }
 
 void HCompiler::
@@ -88,28 +87,39 @@ readSrc()
 }
 
 //  TODO: Handle some signals so mainwindow
-// can do its fucking job
+//  can do its fucking job
 void HCompiler::
-cmdFinished(QProcess *process)
+cmdFinished()
 {
   QString cmd{ term->getCmd() };
 
-  if( cmd.compare(CC) == 0 )
+  switch(lastCmd)
   {
-    qDebug() << "CC called";
-    FILES.OBJ.flush();
-    FILES.OBJ.close();
-    FILES.SRC.close();
-    dump();
+    case(compileCmd):
+    {
+      FILES.OBJ.flush();
+      FILES.OBJ.close();
+      FILES.SRC.close();
+      dump();
+      break;
+    }
+
+    case(linkCmd):
+    {
+      QString outPath{ FILES.OUT };
+      emit linked(FILES.OUT);
+      break;
+    }
+
+    case(dumpCmd):
+    {
+      FILES.OBJ.close();
+      QString assembly{ term->getStdOut() };
+      emit compiled(assembly);
+      break;
+    }
   }
 
-  else if( cmd.compare(DUMP) == 0)
-  {
-    qDebug() << "dump called";
-    FILES.OBJ.close();
-    QString assembly{ term->getStdOut() };
-    emit compiled(assembly);
-  }
 }
 
 void HCompiler::
@@ -121,21 +131,23 @@ writeSrc(QString text)
 QString HCompiler::
 getExecPath()
 {
-  return FILES.OUT.fileName();
+  return FILES.OUT;
 }
 
 void HCompiler::
 link()
 {
-  if(!FILES.OUT.open())
+  qDebug() << ".......";
+  if(!FILES.SRC.open())
   {
     QMessageBox::warning(NULL, "outWarning"
       , "Could not make a temp executable");
   }
 
-  QStringList ARGS{FILES.OBJ.fileName()
-          , "-o" , FILES.OUT.fileName() };
+  QStringList ARGS{FILES.SRC.fileName()
+          , "-o" , FILES.OUT };
 
+  lastCmd = linkCmd;
   term->exec(CC, ARGS);
-  FILES.OUT.close();
+  qDebug() << "FILE" << FILES.OUT;
 }

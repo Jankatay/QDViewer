@@ -32,7 +32,7 @@ UTerm::finishedExec( int
 
   QByteArray out{ process->readAllStandardOutput() };
   currentStdOut = out;
-  emit sigFinishedExec(process);
+  emit sigFinishedExec();
 }
 
 void

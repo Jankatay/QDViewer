@@ -17,7 +17,7 @@ public:
   QString getStdOut();
 
 signals:
-  void sigFinishedExec(QProcess *process);
+  void sigFinishedExec();
 
 public slots:
   void finishedExec(int, QProcess::ExitStatus);

@@ -35,7 +35,7 @@ public:
   void writeSrc(QString text);
 
 private slots:
-  void cmdFinished(QProcess *process);
+  void cmdFinished();
 
 signals:
   void compiled(QString assembly);
@@ -47,6 +47,14 @@ private:
   QString DUMP;
   CFiles FILES;
   UTerm *term;
+
+  enum
+  {
+    compileCmd,
+    dumpCmd,
+    linkCmd
+  }
+  lastCmd;
 };
 
 #endif // HCOMPILER_H
