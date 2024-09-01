@@ -21,6 +21,9 @@ MainWindow (QWidget *parent)
     , &UTerm::sigFinishedExec
     , this, &MainWindow::stdTermFinished);
 
+  connect(stdTerm
+    , &UTerm::sigOutputAvailable
+    , this, &MainWindow::stdOutputAvailable);
   connect(compiler
     , qOverload<QString>
     (&HCompiler::linked)
@@ -63,29 +66,29 @@ on_pushButton_pressed()
 
 void MainWindow::on_runButton_pressed()
 {
+  compiler->terminate();
+  ui->stdIn->clear();
+  stdTerm->clearStdOut();
   compiler->link();
-  //QString execPath{  };
-  //stdTerm->exec("", QStringList());
-  //QString execPath{ compiler->getExecPath() };
-  //QStringList ARGS{ ui->stdIn->text().split(' ') };
-  //ui->stdIn->clear();
-  //qDebug() << execPath << ARGS;
-  //stdTerm->exec(execPath, ARGS);
-  //qDebug() << execPath << ARGS << "called";
 }
 
 void MainWindow::
 fillStdOutBrowser()
 {
-  //ui->stdOut->setText(out);
+  QString out{ stdTerm->getStdOut() };
+  qDebug() << out;
+  ui->stdOut->setText(out);
 }
 
 void MainWindow::
 finishedLinking(QString execPath)
 {
   currentTask = fillStdOut;
-  stdTerm->exec(execPath, QStringList());
-  qDebug() << "finished linking";
+  QStringList ARGS{ ui->stdIn->text()
+                        .split(' ') };
+  ui->stdIn->clear();
+  ui->stdOut->clear();
+  stdTerm->exec(execPath, ARGS);
 }
 
 void MainWindow::
@@ -96,9 +99,37 @@ stdTermFinished()
   {
     case(fillStdOut):
     {
-      QString out{ stdTerm->getStdOut() };
-      ui->stdOut->setText( out );
+      fillStdOutBrowser();
+      break;
+    }
+    case(clearStdOut):
+    {
+      ui->stdOut->clear();
+      break;
     }
   }
 
 }
+
+void MainWindow::
+stdOutputAvailable()
+{
+  QString out{ stdTerm->getStdOut() };
+  ui->stdOut->append( out );
+}
+
+
+void MainWindow::on_stdIn_returnPressed()
+{
+  QString in{ ui->stdIn->text() };
+  stdTerm->write( in );
+  ui->stdIn->clear();
+}
+
+
+void MainWindow::on_tButton_pressed()
+{
+  stdTerm->terminate();
+  ui->stdOut->append("\nProcess Terminated\n");
+}
+

@@ -72,6 +72,7 @@ dump()
   lastCmd = dumpCmd;
   QString objPath{ FILES.OBJ.fileName() };
   QStringList ARGS{"-d", objPath};
+  qDebug() << DUMP << ARGS;
   term->exec(DUMP, ARGS);
 }
 
@@ -92,7 +93,6 @@ void HCompiler::
 cmdFinished()
 {
   QString cmd{ term->getCmd() };
-
   switch(lastCmd)
   {
     case(compileCmd):
@@ -150,4 +150,10 @@ link()
   lastCmd = linkCmd;
   term->exec(CC, ARGS);
   qDebug() << "FILE" << FILES.OUT;
+}
+
+void HCompiler::
+terminate()
+{
+  term->terminate();
 }

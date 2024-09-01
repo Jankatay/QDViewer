@@ -33,6 +33,7 @@ public:
   void setFiles(CFiles newFiles);
   void readSrc();
   void writeSrc(QString text);
+  void terminate();
 
 private slots:
   void cmdFinished();

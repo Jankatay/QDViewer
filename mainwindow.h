@@ -29,6 +29,11 @@ private slots:
   void fillStdOutBrowser();
   void finishedLinking(QString execPath);
   void stdTermFinished();
+  void stdOutputAvailable();
+
+  void on_stdIn_returnPressed();
+
+  void on_tButton_pressed();
 
 private:
   Ui::MainWindow *ui;
@@ -37,7 +42,9 @@ private:
 
   enum Tasks
   {
-    fillStdOut
+    fillStdOut,
+    clearStdOut,
+    endCurrentProcess
   }
   currentTask;
 };

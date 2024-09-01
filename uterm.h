@@ -12,15 +12,20 @@ class UTerm : public QObject
 
 public:
   UTerm(QObject *parent);
-  void exec(QString cmd, QStringList args);
   QString getCmd();
   QString getStdOut();
+  void exec(QString cmd, QStringList args);
+  void write(QString in);
+  void terminate();
+  void clearStdOut();
 
 signals:
   void sigFinishedExec();
+  void sigOutputAvailable();
 
 public slots:
   void finishedExec(int, QProcess::ExitStatus);
+  void outputAvailable();
 
 private:
   QString currentCmd;

@@ -13,6 +13,10 @@ UTerm::UTerm (QObject *parent)
     (&QProcess::finished)
     , this, &UTerm::finishedExec );
 
+  connect( process
+    , &QProcess::readyReadStandardOutput
+    , this, &UTerm::outputAvailable);
+
 }
 
 void
@@ -29,9 +33,6 @@ UTerm::finishedExec( int
     QMessageBox::warning(NULL, "cErr", err.join(' '));
     return;
   }
-
-  QByteArray out{ process->readAllStandardOutput() };
-  currentStdOut = out;
   emit sigFinishedExec();
 }
 
@@ -55,4 +56,39 @@ QString UTerm::
 getCmd()
 {
   return currentCmd;
+}
+
+void UTerm::
+outputAvailable()
+{
+  QByteArray out{ process->readAllStandardOutput() };
+  currentStdOut = out;
+  emit sigOutputAvailable();
+}
+
+void UTerm::
+write(QString in)
+{
+  if(! process->isWritable() )
+  {
+    QMessageBox::warning(NULL, "nostdin"
+    , "No process is running.\n"
+      "Simply click run with this box"
+      "filled for parameter arguments");
+  }
+
+  in.append('\n');
+  process->write( in.toUtf8() );
+}
+
+void UTerm::
+terminate()
+{
+  process->terminate();
+}
+
+void UTerm::
+clearStdOut()
+{
+  currentStdOut.clear();
 }

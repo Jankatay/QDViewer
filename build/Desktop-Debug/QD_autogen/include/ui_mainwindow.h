@@ -32,6 +32,7 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QPushButton *openButton;
     QPushButton *pushButton;
+    QPushButton *tButton;
     QPushButton *cButton;
     QPushButton *runButton;
     QHBoxLayout *horizontalLayout;
@@ -64,6 +65,11 @@ public:
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
 
         horizontalLayout_2->addWidget(pushButton);
+
+        tButton = new QPushButton(centralwidget);
+        tButton->setObjectName(QString::fromUtf8("tButton"));
+
+        horizontalLayout_2->addWidget(tButton);
 
         cButton = new QPushButton(centralwidget);
         cButton->setObjectName(QString::fromUtf8("cButton"));
@@ -136,6 +142,7 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         openButton->setText(QCoreApplication::translate("MainWindow", "open", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "Save", nullptr));
+        tButton->setText(QCoreApplication::translate("MainWindow", "Terminate", nullptr));
         cButton->setText(QCoreApplication::translate("MainWindow", "Compile", nullptr));
         runButton->setText(QCoreApplication::translate("MainWindow", "Run", nullptr));
         srcEdit->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
